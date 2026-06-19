@@ -1,0 +1,43 @@
+mixed-port: 7890
+mode: rule
+allow-lan: false
+log-level: info
+
+proxies:
+  - name: Netherlands
+    type: vless
+    server: 188.114.97.4
+    port: 443
+    uuid: cf39fab0-bb85-42cb-9945-2ad69d78e575
+    network: ws
+    tls: true
+    servername: rubifen.adaspoloandco.com
+    client-fingerprint: chrome
+    ws-opts:
+      path: /GOrbEh
+      headers:
+        Host: rubifen.adaspoloandco.com
+
+  - name: Cloudflare
+    type: vless
+    server: 104.26.14.85
+    port: 443
+    uuid: cf39fab0-bb85-42cb-9945-2ad69d78e575
+    network: ws
+    tls: true
+    servername: rubifen.adaspoloandco.com
+    client-fingerprint: chrome
+    ws-opts:
+      path: /GOrbEh
+      headers:
+        Host: rubifen.adaspoloandco.com
+
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - Netherlands
+      - Cloudflare
+
+rules:
+  - MATCH,Proxy
